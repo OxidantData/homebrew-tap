@@ -5,21 +5,21 @@ class Oxidant < Formula
   if OS.mac?
     if Hardware::CPU.arm?
       url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.1/oxidant-aarch64-apple-darwin.tar.xz"
-      sha256 "b973312aea315ce4a5ba228b289b888e539d638c14fd9d5e2e14bbf8f897bd73"
+      sha256 "75bb9a14b1419486859cb26e8a15de7df7aa10d828c203648fa1816cfad932ba"
     end
     if Hardware::CPU.intel?
       url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.1/oxidant-x86_64-apple-darwin.tar.xz"
-      sha256 "8d69c29b00abd3e7e6aa56eacf7d0adb279814d6c28dc6f59af3df424c6d0d1a"
+      sha256 "7a82107d95d5862a613f38b18f927dc7ba3a443667b01c0d456c152a22f2cd37"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
       url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.1/oxidant-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "a52df47edc25ab0f09bdbd6ba3e1502e491e5acc1bc5811d00c7889de9a88327"
+      sha256 "435bb64ba09462e34f965885806c0a1fc51534952c228d5ba9d84325e271ac76"
     end
     if Hardware::CPU.intel?
       url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.1/oxidant-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "5bb09ecd39c89ec0e3f37cbb05f7f49db60d85ed72521fa5926ab76ac9ce3cc0"
+      sha256 "b08f7825ae441b3d6733e03b8920d2d1fc584565f5fa6fa5a08c0dadbd082075"
     end
   end
   license "AGPL-3.0-or-later"
