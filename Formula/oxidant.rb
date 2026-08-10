@@ -1,25 +1,25 @@
 class Oxidant < Formula
   desc "The `oxidant` binary: launches the Spark Connect server and dev utilities."
   homepage "https://github.com/OxidantData/Oxidant"
-  version "0.1.3"
+  version "0.1.4"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.3/oxidant-aarch64-apple-darwin.tar.xz"
-      sha256 "ff36aefa98b5bfeb22a98288de6757283811f801b88a9fc2b0ef1cc811a7c2f5"
+      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.4/oxidant-aarch64-apple-darwin.tar.xz"
+      sha256 "aa684bd2631ef1f59bd4980f76b399c9497477c66aec8778621af02adc4294f2"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.3/oxidant-x86_64-apple-darwin.tar.xz"
-      sha256 "27008c2eb5335b256bbf1f398fe73838744bfe13a579e67ef8b030a53b2a4fe2"
+      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.4/oxidant-x86_64-apple-darwin.tar.xz"
+      sha256 "b27f6fbe6842f3685cb7913f3200f424b8eb0bbac1edbeb8ea1dd6aed5173bad"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.3/oxidant-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "589d9f3f8365c0fb3558ad8238d239c501ba71ba996216cca6edd367c647d7e4"
+      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.4/oxidant-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "4b3487f2436b96280c84993a661519de94297cedbc1e79a16967fbb9c29c8784"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.3/oxidant-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "8ddaaf57e49b65bcde899b3f9c5b437eb984e32ee4eefcef92634bdcdf493c89"
+      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.4/oxidant-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "f9818631eb64fce7d1d734490590e57f9256a6345262ddc4639157faf65000e3"
     end
   end
   license "AGPL-3.0-or-later"
@@ -47,10 +47,18 @@ class Oxidant < Formula
   end
 
   def install
-    bin.install "oxidant" if OS.mac? && Hardware::CPU.arm?
-    bin.install "oxidant" if OS.mac? && Hardware::CPU.intel?
-    bin.install "oxidant" if OS.linux? && Hardware::CPU.arm?
-    bin.install "oxidant" if OS.linux? && Hardware::CPU.intel?
+    if OS.mac? && Hardware::CPU.arm?
+      bin.install "oxidant"
+    end
+    if OS.mac? && Hardware::CPU.intel?
+      bin.install "oxidant"
+    end
+    if OS.linux? && Hardware::CPU.arm?
+      bin.install "oxidant"
+    end
+    if OS.linux? && Hardware::CPU.intel?
+      bin.install "oxidant"
+    end
 
     install_binary_aliases!
 
