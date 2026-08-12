@@ -1,25 +1,25 @@
 class Oxidant < Formula
   desc "The `oxidant` binary: launches the Spark Connect server and dev utilities."
   homepage "https://github.com/OxidantData/Oxidant"
-  version "0.1.8"
+  version "0.1.9"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.8/oxidant-aarch64-apple-darwin.tar.xz"
-      sha256 "64c0b3542b88631620abda9861279055fd97c144714743c80e07fd6e159860ec"
+      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.9/oxidant-aarch64-apple-darwin.tar.xz"
+      sha256 "89d6139a0c35ac5e5e0661c1be5fbff1b1177282881d90128df86c887e75da64"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.8/oxidant-x86_64-apple-darwin.tar.xz"
-      sha256 "7fdf8d9dc98ab435de00408c21d3c71a1447b321fe8148fc7e65146fb406a5e8"
+      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.9/oxidant-x86_64-apple-darwin.tar.xz"
+      sha256 "c917186a63d5f30b1f72813e959f05a15b37f46696bc5008a4d00303bb847ebe"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.8/oxidant-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "a5cd0cee7f4afbc7a1a4092109ec29115bcbfc9fd057b54ede67582f5b2c0066"
+      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.9/oxidant-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "56ac63eba0fcedb1e9f6e1e6c6e51cf380213021dca53d52e73bafb3d319fe35"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.8/oxidant-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "136bad0714390c7423067d6625fce8fadb8dca3d855fab6eb815afff12425f2b"
+      url "https://github.com/OxidantData/Oxidant/releases/download/v0.1.9/oxidant-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "8cac372a382373aa0d187b0d11192e0f366316cdab1024a9d6e9781aa40750e7"
     end
   end
   license "AGPL-3.0-or-later"
