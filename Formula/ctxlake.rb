@@ -5,11 +5,16 @@
 # `release` job, after the four target archives and their checksums exist) and
 # the *rendered* file is attached to the GitHub Release as `ctxlake.rb`.
 #
-# Publishing that rendered file into OxidantData/homebrew-tap is a manual step,
-# deliberately: this workflow does not hold a token scoped to the tap repo, and
-# pushing a formula automatically is a bigger blast radius than the benefit of
-# saving that one `cp` + commit. See docs/getting-started.md's Homebrew section
-# and packaging/README.md for the exact command.
+# OxidantData/homebrew-tap pulls that asset itself, hourly, via its own
+# `sync-formulae` workflow — the tap writes only to itself and reads only public
+# releases, so nothing here needs a token scoped to another repo.
+#
+# This used to say the copy was a manual step, "deliberately", on the reasoning
+# that a cross-repo push token outweighed saving one `cp`. The reasoning was fine
+# and the outcome was not: the `cp` never happened for any release, so
+# `brew install oxidantdata/tap/ctxlake` failed for every user while the docs
+# advertised it. A documented step nobody runs is worse than an automated one,
+# because everyone downstream assumes it ran.
 #
 # Shape matches ../../homebrew-tap/Formula/oxidant.rb (the house style: one
 # `if OS.mac? / if Hardware::CPU.arm?` branch per platform+arch, not a loop) —
@@ -18,25 +23,25 @@
 class Ctxlake < Formula
   desc "Zero-compute coordination layer for fleets of coding agents: ctxlake and ctxlake-hook"
   homepage "https://github.com/OxidantData/ctxlake"
-  version "0.1.2"
+  version "0.1.4"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.2/ctxlake-aarch64-apple-darwin.tar.xz"
-      sha256 "f8d9a40190d89b6d096017d71656ea487923f713cb35e79540e85816ed1796ce"
+      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.4/ctxlake-aarch64-apple-darwin.tar.xz"
+      sha256 "0627a56cfb2fdbec4f887398fdd8d591f8647efd0c34c5900fdbf1e9766c18cd"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.2/ctxlake-x86_64-apple-darwin.tar.xz"
-      sha256 "4aa9485d760a7b29c15fb8cc12976a203b870a3b19ce9199bcf3af1891662986"
+      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.4/ctxlake-x86_64-apple-darwin.tar.xz"
+      sha256 "2c2929394e5d706a0adff1e3acee6a49d7a76d1856bd353bd7d6b6fd17f49e48"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.2/ctxlake-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "92d4fec51d2c1b7599f78f57ad0ce594b28a509e74dc81bf3ec389e68c5d5532"
+      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.4/ctxlake-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "27c66fa671c7a11d558f0607dfe47049ae9148e08af9276841bd4d17d994ef80"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.2/ctxlake-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "996d8099fe1f371f383e29405d2f96f7b11afe65486f01003d3dda400b78245a"
+      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.4/ctxlake-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "250542589a435f432d098c7c5e97f17aee1bd847c40d777299585e413e702982"
     end
   end
   license "AGPL-3.0-or-later"
