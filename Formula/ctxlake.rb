@@ -27,21 +27,21 @@ class Ctxlake < Formula
   if OS.mac?
     if Hardware::CPU.arm?
       url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.4/ctxlake-aarch64-apple-darwin.tar.xz"
-      sha256 "0627a56cfb2fdbec4f887398fdd8d591f8647efd0c34c5900fdbf1e9766c18cd"
+      sha256 "61013cae47f08359b93ca811d24b48952eae254b5b64e04e1858d0d6ef25e278"
     end
     if Hardware::CPU.intel?
       url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.4/ctxlake-x86_64-apple-darwin.tar.xz"
-      sha256 "2c2929394e5d706a0adff1e3acee6a49d7a76d1856bd353bd7d6b6fd17f49e48"
+      sha256 "1f4a3d6f33b4762287062f2ca96b080d9b6be1ba6b1b8c147a4c763799cb214a"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
       url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.4/ctxlake-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "27c66fa671c7a11d558f0607dfe47049ae9148e08af9276841bd4d17d994ef80"
+      sha256 "821d4c3a2c034b44807a64b1657c3e88d084f08f71857fa6c067b45ee5ddd02f"
     end
     if Hardware::CPU.intel?
       url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.4/ctxlake-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "250542589a435f432d098c7c5e97f17aee1bd847c40d777299585e413e702982"
+      sha256 "883b22f72fbcd8f6539710d76f1bf56a278fe71179d478ed340ff0d5ba7f53e1"
     end
   end
   license "AGPL-3.0-or-later"
