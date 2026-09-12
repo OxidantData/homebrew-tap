@@ -1,0 +1,82 @@
+# Keep this tap's formulae in step with each project's latest GitHub Release.
+#
+# Formulae used to be copied here by hand. `packaging/ctxlake.rb.tmpl` in the
+# ctxlake repo even said so — "publishing that rendered file into
+# OxidantData/homebrew-tap is a manual step, deliberately" — reasoning that a
+# cross-repo push token was a bigger blast radius than the one `cp` it saved.
+#
+# The reasoning was fine and the outcome was not: the `cp` never happened, so
+# `brew install oxidantdata/tap/ctxlake` failed for every user of every release
+# while the docs advertised it. A step that is documented but never run is worse
+# than one that is automated, because everyone downstream believes it ran.
+#
+# So this inverts the direction: the tap *pulls*. Each project's release workflow
+# already renders its formula and attaches it as a release asset; this job fetches
+# that asset and commits it here. Nothing needs a token scoped to another repo —
+# this workflow writes only to the repository it lives in, and reads only public
+# releases. That is the whole reason the push design was left manual.
+name: sync-formulae
+
+on:
+  schedule:
+    # Hourly, at a minute nobody else picks, so a release is live in the tap
+    # within the hour without anyone remembering anything.
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull each project's rendered formula from its latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          # `<repo>:<asset>` — the asset is also the file name under Formula/.
+          PROJECTS: |
+            OxidantData/ctxlake:ctxlake.rb
+        run: |
+          set -euo pipefail
+          changed=()
+          while read -r entry; do
+            [ -n "$entry" ] || continue
+            repo="${entry%%:*}"
+            formula="${entry##*:}"
+
+            tag="$(gh release view --repo "$repo" --json tagName --jq .tagName)"
+            tmp="$(mktemp -d)"
+            if ! gh release download "$tag" --repo "$repo" \
+                 --pattern "$formula" --dir "$tmp" 2>/dev/null; then
+              echo "::warning::$repo $tag has no $formula asset — skipping"
+              continue
+            fi
+
+            # A formula that does not parse would break `brew` for everyone using
+            # this tap, including projects this job did not touch. Checking it
+            # here keeps one project's bad render from taking the others down.
+            ruby -c "$tmp/$formula" >/dev/null
+
+            if ! cmp -s "$tmp/$formula" "Formula/$formula" 2>/dev/null; then
+              mkdir -p Formula
+              cp "$tmp/$formula" "Formula/$formula"
+              changed+=("$formula ($tag)")
+              echo "updated Formula/$formula to $tag"
+            else
+              echo "Formula/$formula already matches $tag"
+            fi
+          done <<< "$PROJECTS"
+
+          if [ ${#changed[@]} -eq 0 ]; then
+            echo "nothing to do"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Formula
+          git commit -m "chore(tap): sync ${changed[*]}"
+          git push
