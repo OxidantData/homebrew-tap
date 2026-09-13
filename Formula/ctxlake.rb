@@ -23,25 +23,25 @@
 class Ctxlake < Formula
   desc "Zero-compute coordination layer for fleets of coding agents: ctxlake and ctxlake-hook"
   homepage "https://github.com/OxidantData/ctxlake"
-  version "0.1.8"
+  version "0.1.9"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.8/ctxlake-aarch64-apple-darwin.tar.xz"
-      sha256 "2b5a9387c256b949555efdd379129938adf16b929a4ef52676862259a2231aaa"
+      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.9/ctxlake-aarch64-apple-darwin.tar.xz"
+      sha256 "10a42e6b4a307ca6a906b258bd5a0c103fe863088ba8862a576ffe250e181b17"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.8/ctxlake-x86_64-apple-darwin.tar.xz"
-      sha256 "12fc4c52f0472d3001dd7227c756fb530527ac271bfcb2acf1a618a88722d6c2"
+      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.9/ctxlake-x86_64-apple-darwin.tar.xz"
+      sha256 "f7ba930ddfd1c97a8cad8e49fab6c329f3018571f4e2f65ccd50f24792d4004b"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.8/ctxlake-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "c919a6d861e2bd008e2124a075745ea2bd7f1d2b494c5ee1a875b7a7fcf64106"
+      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.9/ctxlake-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "ad74a278c9ad8c169e2c5c15fd013ea698e32701568bb3ab54a2a57693b81480"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.8/ctxlake-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "22e483e6bd8457a09f711fdb7c132f5c33e13a8b9c6cbcdabd31098f66b5990f"
+      url "https://github.com/OxidantData/ctxlake/releases/download/v0.1.9/ctxlake-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "9dce737d8db473753958dd5c5fc0b0de7ac4e9489ad93f26301acd168a45ff57"
     end
   end
   license "AGPL-3.0-or-later"
